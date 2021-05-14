@@ -36,7 +36,7 @@ func (m *CategoryModifier) ModifyResponse(res *http.Response) error {
 		return err
 	}
 
-	res.Body = ioutil.NopCloser(bytes.NewBuffer(b))
+	res.Body = ioutil.NopCloser(bytes.NewReader(b))
 
 	return nil
 }

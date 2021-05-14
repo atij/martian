@@ -36,7 +36,7 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 		return err
 	}
 
-	res.Body = ioutil.NopCloser(bytes.NewBuffer(b))
+	res.Body = ioutil.NopCloser(bytes.NewReader(b))
 
 	return nil
 }
@@ -52,7 +52,7 @@ type CategoryCollectionRequest struct {
 }
 
 type CategoryCollectionResponse struct {
-	Items []CategoryResponse
+	Items []CategoryResponse `json:"id"`
 }
 
 func (r *CategoryCollectionRequest) transform() *CategoryCollectionResponse {
