@@ -31,7 +31,7 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 
 	result := r.transform()
 
-	b, err := json.Marshal(result)
+	b, err := json.Marshal(&result)
 	if err != nil {
 		return err
 	}
