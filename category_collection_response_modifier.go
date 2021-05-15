@@ -35,13 +35,14 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 
 	var result []CategoryResponse
 	for _, item := range list {
-		var i CategoryRequest
-		err = json.Unmarshal(item, &i)
+		//var i CategoryRequest
+		var s = new(CategoryRequest)
+		err = json.Unmarshal(item, &s)
 		if err != nil {
 			return err
 		}
 
-		r := i.transform()
+		r := s.transform()
 
 		result = append(result, *r)
 	}
