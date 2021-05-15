@@ -60,8 +60,13 @@ func CategoryCollectionNewModifier(contentType string) martian.ResponseModifier 
 	}
 }
 
+type CategoryCollectionModifierJSON struct {
+	ContentType string               `json:"contentType"`
+	Scope       []parse.ModifierType `json:"scope"`
+}
+
 func categoryCollectionModifierFromJSON(b []byte) (*parse.Result, error) {
-	msg := &CategoryModifierJSON{}
+	msg := &CategoryCollectionModifierJSON{}
 
 	if err := json.Unmarshal(b, msg); err != nil {
 		return nil, err
