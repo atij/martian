@@ -66,26 +66,29 @@ func categoryModifierFromJSON(b []byte) (*parse.Result, error) {
 
 type CategoryRequest struct {
 	ID                    int           `json:"id"`
-	ParentID              interface{}   `json:"parent_id"`
 	Name                  string        `json:"name"`
 	Permalink             string        `json:"permalink"`
+	ParentID              interface{}   `json:"parent_id"`
+	Enabled               bool          `json:"enabled"`
 	Position              int           `json:"position"`
-	ShowroomPosition      interface{}   `json:"showroom_position"`
+	Anchor                bool          `json:"anchor"`
 	IncludeInNavigation   bool          `json:"include_in_navigation"`
 	IncludeInShowroom     bool          `json:"include_in_showroom"`
-	NavigationDisplayType string        `json:"navigation_display_type"`
 	DisplayBanner         bool          `json:"display_banner"`
+	ShowroomPosition      interface{}   `json:"showroom_position"`
+	NavigationDisplayType string        `json:"navigation_display_type"`
 	HideProductRelations  []interface{} `json:"hide_product_relations"`
-	Meta                  struct {
-		Title       string `json:"title"`
-		Keywords    string `json:"keywords"`
-		Description string `json:"description"`
-	} `json:"meta"`
-	Type               string `json:"type"`
-	VisibleForSegments []struct {
+	VisibleFor            []string      `json:"visible_for"`
+	MetaTitle             string        `json:"meta_title"`
+	MetaKeywords          string        `json:"meta_keywords"`
+	MetaDescription       string        `json:"meta_description"`
+	VisibleForSegments    []struct {
 		Type   string   `json:"type"`
 		Values []string `json:"values"`
 	} `json:"visible_for_segments"`
+	Type           string      `json:"type"`
+	ProductsCount  int         `json:"products_count"`
+	LastBqViewName interface{} `json:"last_bq_view_name"`
 }
 
 type CategoryResponse struct {
