@@ -100,11 +100,13 @@ type CategoryResponse struct {
 	Permalink  string        `json:"permalink"`
 	Hide       []interface{} `json:"hide"`
 	Conditions []Conditions  `json:"conditions"`
-	Meta       struct {
-		Title       string `json:"title"`
-		Keywords    string `json:"keywords"`
-		Description string `json:"description"`
-	} `json:"meta"`
+	Meta       Meta          `json:"meta"`
+}
+
+type Meta struct {
+	Title       string `json:"title"`
+	Keywords    string `json:"keywords"`
+	Description string `json:"description"`
 }
 
 type Conditions struct {
@@ -143,6 +145,10 @@ func (r *CategoryRequest) transform() *CategoryResponse {
 		Permalink:  r.Permalink,
 		Hide:       r.HideProductRelations,
 		Conditions: conditions,
-		Meta:       r.Meta,
+		Meta: Meta{
+			Title:       r.MetaTitle,
+			Keywords:    r.MetaKeywords,
+			Description: r.MetaDescription,
+		},
 	}
 }
