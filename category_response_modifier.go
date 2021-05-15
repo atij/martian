@@ -1,9 +1,7 @@
 package catalog
 
 import (
-	"bytes"
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 
 	"github.com/google/martian"
@@ -23,22 +21,23 @@ type CategoryModifier struct {
 func (m *CategoryModifier) ModifyResponse(res *http.Response) error {
 	log.Debugf("catalog.CategoryModifier.ModifyResponse: request: %s", res.Request.URL)
 
-	var r CategoryRequest
+	/*
+		var r CategoryRequest
 
-	err := json.NewDecoder(res.Body).Decode(&r)
-	if err != nil {
-		return err
-	}
+		err := json.NewDecoder(res.Body).Decode(&r)
+		if err != nil {
+			return err
+		}
 
-	result := r.transform()
+		result := r.transform()
 
-	b, err := json.Marshal(&result)
-	if err != nil {
-		return err
-	}
+		b, err := json.Marshal(&result)
+		if err != nil {
+			return err
+		}
 
-	res.Body = ioutil.NopCloser(bytes.NewReader(b))
-
+		res.Body = ioutil.NopCloser(bytes.NewReader(b))
+	*/
 	return nil
 }
 
