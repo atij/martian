@@ -60,47 +60,48 @@ func categoryModifierFromJSON(b []byte) (*parse.Result, error) {
 		return nil, err
 	}
 
-	return parse.NewResult(CategoryNewModifier(msg.ContentType), msg.Scope)
+	mod := CategoryNewModifier(msg.ContentType)
+	return parse.NewResult(mod, msg.Scope)
 }
 
 type CategoryRequest struct {
-	ID                    int           `json:"id"`
-	ParentID              interface{}   `json:"parent_id"`
-	Name                  string        `json:"name"`
-	Permalink             string        `json:"permalink"`
-	Position              int           `json:"position"`
-	ShowroomPosition      interface{}   `json:"showroom_position"`
-	IncludeInNavigation   bool          `json:"include_in_navigation"`
-	IncludeInShowroom     bool          `json:"include_in_showroom"`
-	NavigationDisplayType string        `json:"navigation_display_type"`
-	DisplayBanner         bool          `json:"display_banner"`
-	HideProductRelations  []interface{} `json:"hide_product_relations"`
-	Meta                  struct {
-		Title       string `json:"title"`
-		Keywords    string `json:"keywords"`
-		Description string `json:"description"`
-	} `json:"meta"`
-	Type               string `json:"type"`
-	VisibleForSegments []struct {
-		Type   string   `json:"type"`
-		Values []string `json:"values"`
-	} `json:"visible_for_segments"`
+	ID       int         `json:"id"`
+	ParentID interface{} `json:"parent_id"`
+	Name     string      `json:"name"`
+	// Permalink             string        `json:"permalink"`
+	// Position              int           `json:"position"`
+	// ShowroomPosition      interface{}   `json:"showroom_position"`
+	// IncludeInNavigation   bool          `json:"include_in_navigation"`
+	// IncludeInShowroom     bool          `json:"include_in_showroom"`
+	// NavigationDisplayType string        `json:"navigation_display_type"`
+	// DisplayBanner         bool          `json:"display_banner"`
+	// HideProductRelations  []interface{} `json:"hide_product_relations"`
+	// Meta                  struct {
+	// 	Title       string `json:"title"`
+	// 	Keywords    string `json:"keywords"`
+	// 	Description string `json:"description"`
+	// } `json:"meta"`
+	// Type               string `json:"type"`
+	// VisibleForSegments []struct {
+	// 	Type   string   `json:"type"`
+	// 	Values []string `json:"values"`
+	// } `json:"visible_for_segments"`
 }
 
 type CategoryResponse struct {
-	ID         int           `json:"id"`
-	Type       string        `json:"type"`
-	ParentID   interface{}   `json:"parent_id"`
-	Name       string        `json:"name"`
-	Position   int           `json:"position"`
-	Permalink  string        `json:"permalink"`
-	Hide       []interface{} `json:"hide"`
-	Conditions []Conditions  `json:"conditions"`
-	Meta       struct {
-		Title       string `json:"title"`
-		Keywords    string `json:"keywords"`
-		Description string `json:"description"`
-	} `json:"meta"`
+	ID       int         `json:"id"`
+	Type     string      `json:"type"`
+	ParentID interface{} `json:"parent_id"`
+	Name     string      `json:"name"`
+	// Position   int           `json:"position"`
+	// Permalink  string        `json:"permalink"`
+	// Hide       []interface{} `json:"hide"`
+	// Conditions []Conditions  `json:"conditions"`
+	// Meta       struct {
+	// 	Title       string `json:"title"`
+	// 	Keywords    string `json:"keywords"`
+	// 	Description string `json:"description"`
+	// } `json:"meta"`
 }
 
 type Conditions struct {
