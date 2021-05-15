@@ -12,7 +12,7 @@ import (
 )
 
 func init() {
-	parse.Register("catalog.CategoryCollectionModifier", categoryModifierFromJSON)
+	parse.Register("catalog.CategoryCollectionModifier", categoryCollectionModifierFromJSON)
 }
 
 type CategoryCollectionModifier struct {
@@ -58,4 +58,15 @@ func CategoryCollectionNewModifier(contentType string) martian.ResponseModifier 
 	return &CategoryModifier{
 		ContentType: contentType,
 	}
+}
+
+func categoryCollectionModifierFromJSON(b []byte) (*parse.Result, error) {
+	msg := &CategoryModifierJSON{}
+
+	if err := json.Unmarshal(b, msg); err != nil {
+		return nil, err
+	}
+
+	mod := CategoryCollectionNewModifier(msg.ContentType)
+	return parse.NewResult(mod, msg.Scope)
 }
