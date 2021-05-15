@@ -17,7 +17,7 @@ func init() {
 }
 
 type CategoryModifier struct {
-	contentType string
+	ContentType string
 }
 
 func (m *CategoryModifier) ModifyResponse(res *http.Response) error {
