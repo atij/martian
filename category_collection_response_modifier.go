@@ -31,20 +31,18 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 
 	result := r.transform()
 
-	b, err := json.Marshal(&result)
-	if err != nil {
-		return err
-	}
+	var buffer bytes.Buffer
+	json.NewEncoder(&buffer).Encode(&result)
 
-	res.Body = ioutil.NopCloser(bytes.NewReader(b))
-	res.StatusCode = 200
+	res.Body = ioutil.NopCloser(&buffer)
+	res.Header.Set("Content-Type", "application/json")
 
 	return nil
 }
 
 func CategoryCollectionNewModifier(contentType string) martian.ResponseModifier {
 	return &CategoryModifier{
-		contentType: contentType,
+		ContentType: contentType,
 	}
 }
 
