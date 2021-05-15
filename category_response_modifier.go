@@ -65,9 +65,9 @@ func categoryModifierFromJSON(b []byte) (*parse.Result, error) {
 }
 
 type CategoryRequest struct {
-	ID       int         `json:"id"`
-	ParentID interface{} `json:"parent_id"`
-	Name     string      `json:"name"`
+	ID int `json:"id"`
+	//ParentID interface{} `json:"parent_id"`
+	Name string `json:"name"`
 	// Permalink             string        `json:"permalink"`
 	// Position              int           `json:"position"`
 	// ShowroomPosition      interface{}   `json:"showroom_position"`
@@ -81,7 +81,7 @@ type CategoryRequest struct {
 	// 	Keywords    string `json:"keywords"`
 	// 	Description string `json:"description"`
 	// } `json:"meta"`
-	// Type               string `json:"type"`
+	Type string `json:"type"`
 	// VisibleForSegments []struct {
 	// 	Type   string   `json:"type"`
 	// 	Values []string `json:"values"`
@@ -89,10 +89,10 @@ type CategoryRequest struct {
 }
 
 type CategoryResponse struct {
-	ID       int         `json:"id"`
-	Type     string      `json:"type"`
-	ParentID interface{} `json:"parent_id"`
-	Name     string      `json:"name"`
+	ID   int    `json:"id"`
+	Type string `json:"type"`
+	//ParentID interface{} `json:"parent_id"`
+	Name string `json:"name"`
 	// Position   int           `json:"position"`
 	// Permalink  string        `json:"permalink"`
 	// Hide       []interface{} `json:"hide"`
@@ -116,30 +116,30 @@ type Segment struct {
 
 func (r *CategoryRequest) transform() *CategoryResponse {
 
-	var conditions []Conditions
-	var segments []Segment
-	for _, c := range r.VisibleForSegments {
-		s := Segment{
-			Type:   c.Type,
-			Values: c.Values,
-		}
-		segments = append(segments, s)
-	}
+	// var conditions []Conditions
+	// var segments []Segment
+	// for _, c := range r.VisibleForSegments {
+	// 	s := Segment{
+	// 		Type:   c.Type,
+	// 		Values: c.Values,
+	// 	}
+	// 	segments = append(segments, s)
+	// }
 
-	conditions = append(conditions, Conditions{
-		Type:  "segment",
-		Value: segments,
-	})
+	// conditions = append(conditions, Conditions{
+	// 	Type:  "segment",
+	// 	Value: segments,
+	// })
 
 	return &CategoryResponse{
-		ID:         r.ID,
-		Type:       r.Type,
-		ParentID:   r.ParentID,
-		Name:       r.Name,
-		Position:   r.Position,
-		Permalink:  r.Permalink,
-		Hide:       r.HideProductRelations,
-		Conditions: conditions,
-		Meta:       r.Meta,
+		ID:   r.ID,
+		Type: r.Type,
+		// ParentID:   r.ParentID,
+		// Name:       r.Name,
+		// Position:   r.Position,
+		// Permalink:  r.Permalink,
+		// Hide:       r.HideProductRelations,
+		// Conditions: conditions,
+		// Meta:       r.Meta,
 	}
 }
