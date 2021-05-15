@@ -55,10 +55,11 @@ type CategoryCollectionResponse struct {
 }
 
 func (r *CategoryCollectionRequest) transform() *CategoryCollectionResponse {
-	log.Debugf("transform")
-	var result CategoryCollectionResponse
+	var categories []*CategoryResponse
 	for _, item := range r.Items {
-		result.Items = append(result.Items, item.transform())
+		categories = append(categories, item.transform())
 	}
-	return &result
+	return &CategoryCollectionResponse{
+		Items: categories,
+	}
 }
