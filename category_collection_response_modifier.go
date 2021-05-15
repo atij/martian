@@ -22,14 +22,29 @@ type CategoryCollectionModifier struct {
 func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 	log.Debugf("catalog.CategoryModifier.ModifyResponse: request: %s", res.Request.URL)
 
-	var r CategoryCollectionRequest
-
-	err := json.NewDecoder(res.Body).Decode(&r)
+	var list []json.RawMessage
+	b, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(b, &list)
+	//err := json.NewDecoder(res.Body).Decode(&r)
 	if err != nil {
 		return err
 	}
 
-	result := r.transform()
+	var result []CategoryResponse
+	for _, item := range list {
+		var i CategoryRequest
+		err = json.Unmarshal(item, &i)
+		if err != nil {
+			return err
+		}
+
+		r := i.transform()
+
+		result = append(result, *r)
+	}
 
 	var buffer bytes.Buffer
 	json.NewEncoder(&buffer).Encode(&result)
@@ -43,23 +58,5 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 func CategoryCollectionNewModifier(contentType string) martian.ResponseModifier {
 	return &CategoryModifier{
 		ContentType: contentType,
-	}
-}
-
-type CategoryCollectionRequest struct {
-	Items []CategoryRequest
-}
-
-type CategoryCollectionResponse struct {
-	Items []*CategoryResponse
-}
-
-func (r *CategoryCollectionRequest) transform() *CategoryCollectionResponse {
-	var categories []*CategoryResponse
-	for _, item := range r.Items {
-		categories = append(categories, item.transform())
-	}
-	return &CategoryCollectionResponse{
-		Items: categories,
 	}
 }
