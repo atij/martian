@@ -12,7 +12,6 @@ import (
 )
 
 func init() {
-	log.Debugf("catalog.CategoryModifier register")
 	parse.Register("catalog.CategoryModifier", categoryModifierFromJSON)
 }
 
@@ -45,7 +44,7 @@ func (m *CategoryModifier) ModifyResponse(res *http.Response) error {
 func CategoryNewModifier(contentType string) martian.ResponseModifier {
 	log.Debugf("catalog.CategoryNewModifier: contentType %s", contentType)
 	return &CategoryModifier{
-		contentType: contentType,
+		ContentType: contentType,
 	}
 }
 
