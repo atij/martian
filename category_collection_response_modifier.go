@@ -37,6 +37,7 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 	}
 
 	res.Body = ioutil.NopCloser(bytes.NewReader(b))
+	res.StatusCode = 200
 
 	return nil
 }

@@ -12,6 +12,7 @@ import (
 )
 
 func init() {
+	log.Debugf("catalog.CategoryModifier register")
 	parse.Register("catalog.CategoryModifier", categoryModifierFromJSON)
 }
 
@@ -42,6 +43,7 @@ func (m *CategoryModifier) ModifyResponse(res *http.Response) error {
 }
 
 func CategoryNewModifier(contentType string) martian.ResponseModifier {
+	log.Debugf("catalog.CategoryNewModifier: contentType %s", contentType)
 	return &CategoryModifier{
 		contentType: contentType,
 	}
@@ -86,7 +88,7 @@ type CategoryRequest struct {
 	} `json:"visible_for_segments"`
 }
 
-type 	CategoryResponse struct {
+type CategoryResponse struct {
 	ID         int           `json:"id"`
 	Type       string        `json:"type"`
 	ParentID   interface{}   `json:"parent_id"`
