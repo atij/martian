@@ -33,7 +33,7 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 		return err
 	}
 
-	var result []CategoryResponse
+	var result []*CategoryResponse
 	for _, item := range list {
 		//var i CategoryRequest
 		var s = new(CategoryRequest)
@@ -42,9 +42,7 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 			return err
 		}
 
-		r := s.transform()
-
-		result = append(result, *r)
+		result = append(result, s.transform())
 	}
 
 	var buffer bytes.Buffer
