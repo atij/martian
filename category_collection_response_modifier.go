@@ -47,11 +47,11 @@ func CategoryCollectionNewModifier(contentType string) martian.ResponseModifier 
 }
 
 type CategoryCollectionRequest struct {
-	Items []CategoryRequest `json:"collection"`
+	Items []CategoryRequest
 }
 
 type CategoryCollectionResponse struct {
-	Items []CategoryResponse `json:""`
+	Items []CategoryResponse
 }
 
 func (r *CategoryCollectionRequest) transform() *CategoryCollectionResponse {
