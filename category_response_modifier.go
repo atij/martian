@@ -86,7 +86,7 @@ type CategoryRequest struct {
 	} `json:"visible_for_segments"`
 }
 
-type CategoryResponse struct {
+type 	CategoryResponse struct {
 	ID         int           `json:"id"`
 	Type       string        `json:"type"`
 	ParentID   interface{}   `json:"parent_id"`

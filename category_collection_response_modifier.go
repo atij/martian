@@ -48,15 +48,15 @@ func CategoryCollectionNewModifier(contentType string) martian.ResponseModifier 
 }
 
 type CategoryCollectionRequest struct {
-	Items []CategoryRequest
+	Items []CategoryRequest `json:"collection"`
 }
 
 type CategoryCollectionResponse struct {
-	Items []CategoryResponse `json:"id"`
+	Items []CategoryResponse `json:""`
 }
 
 func (r *CategoryCollectionRequest) transform() *CategoryCollectionResponse {
-
+	log.Debugf("transform")
 	var result CategoryCollectionResponse
 	for _, item := range r.Items {
 		result.Items = append(result.Items, *item.transform())
