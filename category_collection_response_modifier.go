@@ -51,14 +51,14 @@ type CategoryCollectionRequest struct {
 }
 
 type CategoryCollectionResponse struct {
-	Items []CategoryResponse
+	Items []*CategoryResponse
 }
 
 func (r *CategoryCollectionRequest) transform() *CategoryCollectionResponse {
 	log.Debugf("transform")
 	var result CategoryCollectionResponse
 	for _, item := range r.Items {
-		result.Items = append(result.Items, *item.transform())
+		result.Items = append(result.Items, item.transform())
 	}
 	return &result
 }
