@@ -33,13 +33,10 @@ func (m *CategoryModifier) ModifyResponse(res *http.Response) error {
 
 	result := r.transform()
 
-	b, err := json.Marshal(&result)
-	if err != nil {
-		return err
-	}
+	var buffer bytes.Buffer
+	json.NewEncoder(&buffer).Encode(&result)
 
-	res.ContentLength = int64(len(b))
-	res.Body = ioutil.NopCloser(bytes.NewBuffer(b))
+	res.Body = ioutil.NopCloser(&buffer)
 	res.Header.Set("Content-Type", "application/json")
 
 	return nil
