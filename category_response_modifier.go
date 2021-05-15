@@ -36,7 +36,7 @@ func (m *CategoryModifier) ModifyResponse(res *http.Response) error {
 		return err
 	}
 
-	res.ContentLength = int64(len(b))
+	//res.ContentLength = int64(len(b))
 	res.Body = ioutil.NopCloser(bytes.NewReader(b))
 	res.Header.Set("Content-Type", "application/json")
 
