@@ -65,30 +65,32 @@ func categoryModifierFromJSON(b []byte) (*parse.Result, error) {
 }
 
 type CategoryRequest struct {
-	ID                    int           `json:"id"`
-	Name                  string        `json:"name"`
-	Permalink             string        `json:"permalink"`
-	ParentID              interface{}   `json:"parent_id"`
-	Enabled               bool          `json:"enabled"`
-	Position              int           `json:"position"`
-	Anchor                bool          `json:"anchor"`
-	IncludeInNavigation   bool          `json:"include_in_navigation"`
-	IncludeInShowroom     bool          `json:"include_in_showroom"`
-	DisplayBanner         bool          `json:"display_banner"`
-	ShowroomPosition      interface{}   `json:"showroom_position"`
-	NavigationDisplayType string        `json:"navigation_display_type"`
-	HideProductRelations  []interface{} `json:"hide_product_relations"`
-	VisibleFor            []string      `json:"visible_for"`
-	MetaTitle             string        `json:"meta_title"`
-	MetaKeywords          string        `json:"meta_keywords"`
-	MetaDescription       string        `json:"meta_description"`
-	VisibleForSegments    []struct {
-		Type   string   `json:"type"`
-		Values []string `json:"values"`
-	} `json:"visible_for_segments"`
-	Type           string      `json:"type"`
-	ProductsCount  int         `json:"products_count"`
-	LastBqViewName interface{} `json:"last_bq_view_name"`
+	ID                    int                  `json:"id"`
+	Name                  string               `json:"name"`
+	Permalink             string               `json:"permalink"`
+	ParentID              interface{}          `json:"parent_id"`
+	Enabled               bool                 `json:"enabled"`
+	Position              int                  `json:"position"`
+	Anchor                bool                 `json:"anchor"`
+	IncludeInNavigation   bool                 `json:"include_in_navigation"`
+	IncludeInShowroom     bool                 `json:"include_in_showroom"`
+	DisplayBanner         bool                 `json:"display_banner"`
+	ShowroomPosition      interface{}          `json:"showroom_position"`
+	NavigationDisplayType string               `json:"navigation_display_type"`
+	HideProductRelations  []interface{}        `json:"hide_product_relations"`
+	VisibleFor            []string             `json:"visible_for"`
+	MetaTitle             string               `json:"meta_title"`
+	MetaKeywords          string               `json:"meta_keywords"`
+	MetaDescription       string               `json:"meta_description"`
+	VisibleForSegments    []VisibleForSegments `json:"visible_for_segments"`
+	Type                  string               `json:"type"`
+	ProductsCount         int                  `json:"products_count"`
+	LastBqViewName        interface{}          `json:"last_bq_view_name"`
+}
+
+type VisibleForSegments struct {
+	Type   string   `json:"type"`
+	Values []string `json:"values"`
 }
 
 type CategoryResponse struct {
@@ -124,10 +126,7 @@ func (r *CategoryRequest) transform() *CategoryResponse {
 	var conditions []Conditions
 	var segments []Segment
 	for _, c := range r.VisibleForSegments {
-		s := Segment{
-			Type:   c.Type,
-			Values: c.Values,
-		}
+		s := Segment(c)
 		segments = append(segments, s)
 	}
 
