@@ -29,6 +29,8 @@ func (m *CategoryModifier) ModifyResponse(res *http.Response) error {
 		return err
 	}
 
+	res.Body.Close()
+
 	result := r.transform()
 
 	b, err := json.Marshal(&result)
