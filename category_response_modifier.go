@@ -66,29 +66,27 @@ func categoryModifierFromJSON(b []byte) (*parse.Result, error) {
 }
 
 type CategoryRequest struct {
-	ID                    int         `json:"id"`
-	Name                  string      `json:"name"`
-	Permalink             string      `json:"permalink"`
-	ParentID              interface{} `json:"parent_id"`
-	Enabled               bool        `json:"enabled"`
-	Position              int         `json:"position"`
-	Anchor                bool        `json:"anchor"`
-	IncludeInNavigation   bool        `json:"include_in_navigation"`
-	IncludeInShowroom     bool        `json:"include_in_showroom"`
-	DisplayBanner         bool        `json:"display_banner"`
-	ShowroomPosition      interface{} `json:"showroom_position"`
-	NavigationDisplayType string      `json:"navigation_display_type"`
-	HideProductRelations  *struct {
-		Colors bool `json:"colors"`
-	} `json:"hide_product_relations,omitempty"`
-	VisibleFor         []string             `json:"visible_for"`
-	MetaTitle          string               `json:"meta_title"`
-	MetaKeywords       string               `json:"meta_keywords"`
-	MetaDescription    string               `json:"meta_description"`
-	VisibleForSegments []VisibleForSegments `json:"visible_for_segments"`
-	Type               string               `json:"type"`
-	ProductsCount      int                  `json:"products_count"`
-	LastBqViewName     interface{}          `json:"last_bq_view_name"`
+	ID                    int                  `json:"id"`
+	Name                  string               `json:"name"`
+	Permalink             string               `json:"permalink"`
+	ParentID              interface{}          `json:"parent_id"`
+	Enabled               bool                 `json:"enabled"`
+	Position              int                  `json:"position"`
+	Anchor                bool                 `json:"anchor"`
+	IncludeInNavigation   bool                 `json:"include_in_navigation"`
+	IncludeInShowroom     bool                 `json:"include_in_showroom"`
+	DisplayBanner         bool                 `json:"display_banner"`
+	ShowroomPosition      interface{}          `json:"showroom_position"`
+	NavigationDisplayType string               `json:"navigation_display_type"`
+	HideProductRelations  interface{}          `json:"hide_product_relations"`
+	VisibleFor            []string             `json:"visible_for"`
+	MetaTitle             string               `json:"meta_title"`
+	MetaKeywords          string               `json:"meta_keywords"`
+	MetaDescription       string               `json:"meta_description"`
+	VisibleForSegments    []VisibleForSegments `json:"visible_for_segments"`
+	Type                  string               `json:"type"`
+	ProductsCount         int                  `json:"products_count"`
+	LastBqViewName        interface{}          `json:"last_bq_view_name"`
 }
 
 type VisibleForSegments struct {
@@ -97,15 +95,13 @@ type VisibleForSegments struct {
 }
 
 type CategoryResponse struct {
-	ID        int         `json:"id"`
-	Type      string      `json:"type"`
-	ParentID  interface{} `json:"parent_id"`
-	Name      string      `json:"name"`
-	Position  int         `json:"position"`
-	Permalink string      `json:"permalink"`
-	Hide      *struct {
-		Colors bool `json:"colors"`
-	} `json:"hide"`
+	ID         int          `json:"id"`
+	Type       string       `json:"type"`
+	ParentID   interface{}  `json:"parent_id"`
+	Name       string       `json:"name"`
+	Position   int          `json:"position"`
+	Permalink  string       `json:"permalink"`
+	Hide       interface{}  `json:"hide"`
 	Conditions []Conditions `json:"conditions"`
 	Meta       Meta         `json:"meta"`
 }
