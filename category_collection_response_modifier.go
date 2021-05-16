@@ -58,7 +58,7 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 }
 
 func CategoryCollectionNewModifier(contentType string) martian.ResponseModifier {
-	return &CategoryModifier{
+	return &CategoryCollectionModifier{
 		ContentType: contentType,
 	}
 }
