@@ -27,6 +27,9 @@ func (m *CategoryCollectionModifier) ModifyResponse(res *http.Response) error {
 	if err != nil {
 		return err
 	}
+
+	res.Body.Close()
+
 	err = json.Unmarshal(b, &list)
 	//err := json.NewDecoder(res.Body).Decode(&r)
 	if err != nil {
